@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:35:43 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/07 20:16:52 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/07 21:23:39 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_handler(char *msg)
 {
-	ft_printf("Error\n%s", msg);
+	ft_printf("%s", msg);
 	exit(EXIT_FAILURE);
 }
 

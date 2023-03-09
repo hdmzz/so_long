@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/07 20:18:52 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/07 22:40:06 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ static void	is_ber_file(char *map)
 	if (!extensions_check || ft_strlen(extensions_check) != 4)
 	{
 		free(extensions_check);
-		perror("Error\n");
+		perror("Error\nExtensions check\n");
 		exit(EXIT_FAILURE);
 	}
-	free(extensions_check);
 }
 
-static void	check_walls(char **rows)
+static void	check_walls(char **rows, t_layout *map_lay)
 {
 	int		i;
-	int		len;
+	size_t	len;
 
 	i = 0;
 	len = ft_strlen(rows[0]);
@@ -40,17 +39,20 @@ static void	check_walls(char **rows)
 		error_handler("Error\nError Walls\n");
 		ft_free_splitted_map(rows);
 	}
-	while (*rows)
+	i = 0;
+	while (rows[i])
 	{
-		if (ft_strlen(*rows) != len)
-			error_handler("Error\nMap is nor rectangular\n");
-		if (*rows[0] != 1 || *rows[len - 1] != 1)
+		if (ft_strlen(rows[i]) != len)
+			error_handler("Error\nMap is not rectangular\n");
+		if ((rows[i][0] != '1') || (rows[i][len - 1] != '1'))
 			error_handler("Error\nThe map isn't closed by walls\n");
-		rows++;
+		i++;
 	}
+	map_lay->rows = i;
+	map_lay->columns = len;
 }
 
-static char	**splitter(char *file, t_layout *map_lay, int fd)
+static char	**splitter(t_layout *map_lay, int fd)
 {
 	char	**map;
 	char	*line;
@@ -70,7 +72,7 @@ static char	**splitter(char *file, t_layout *map_lay, int fd)
 		if (res[i] == 'C')
 			map_lay->collectibles += 1;
 		if (res[i] == 'E')
-			map_lay->exit += 1;
+			map_lay->enter += 1;
 		if (res[i] == 'P')
 			map_lay->exit += 1;
 	}
@@ -78,23 +80,22 @@ static char	**splitter(char *file, t_layout *map_lay, int fd)
 	return (map);
 }
 
-int	check_map(char *file)
+char	**check_map(char *file, t_layout *map_lay)
 {
-	char		**map;
-	int			i;
-	t_layout	*map_lay;
-	int			fd;
+	char	**map;
+	int		fd;
 
 	is_ber_file(file);
 	fd = open(file, O_RDONLY);
-	map_lay = malloc(sizeof(t_layout));
+	map = splitter(map_lay, fd);
 	if (!map)
 		exit(EXIT_FAILURE);
-	map = splitter(file, map_lay, fd);
 	if (map_lay->enter != 1 || map_lay->exit != 1)
 	{
 		ft_free_splitted_map(map);
 		free(map_lay);
 		error_handler("Error\nEnter or exit not ok\n");
 	}
+	check_walls(map, map_lay);
+	return (map);
 }

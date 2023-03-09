@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/09 08:16:47 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/09 10:37:53 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,14 @@ typedef struct s_layout
 
 typedef struct s_game
 {
-	void			*id;
-	void			*w_id;
-	struct s_layout	*backgrnd;
-	int				moves;
+	void		*id;
+	void		*w_id;
+	t_layout	*backgrnd;
+	int			moves_nbr;
+	char		**map;
+	int			width;
+	int			height;
+	int			nxt_move;
 }				t_game;
 
 void	error_handler(char *msg);

@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/07 22:40:06 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/09 11:17:09 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,16 @@ static char	**splitter(t_layout *map_lay, int fd)
 	return (map);
 }
 
+static void	ft_init_layout(t_layout *map_lay)
+{
+	map_lay->collectibles = 0;
+	map_lay->exit = 0;
+	map_lay->enter = 0;
+	map_lay->enemies = 0;
+	map_lay->rows = 0;
+	map_lay->columns = 0;
+}
+
 char	**check_map(char *file, t_layout *map_lay)
 {
 	char	**map;
@@ -87,6 +97,7 @@ char	**check_map(char *file, t_layout *map_lay)
 
 	is_ber_file(file);
 	fd = open(file, O_RDONLY);
+	ft_init_layout(map_lay);
 	map = splitter(map_lay, fd);
 	if (!map)
 		exit(EXIT_FAILURE);

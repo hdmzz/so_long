@@ -6,19 +6,21 @@ D		= KEY_D=100
 UP		= KEY_UP=65362
 DOWN	= KEY_DOWN=65364
 LEFT	= KEY_LEFT=65361
-RIGHT	= KEY_RIG=65363
+RIGHT	= KEY_RIGHT=65363
 R		= KEY_R=114
 Q		= KEY_Q=113
 
 NAME	=	so_long
+
 SRCS	=	srcs/main.c srcs/parser/parser.c \
 			srcs/error/error.c
 
 CC		= gcc
+
 CFLAGS	= -Wall -Wextra -Werror
 
 %.o: %.c libft/libft.a Makefile
-	$(CC) -I./include $< -c -o $@
+	$(CC) $< -c -o $@
 
 all:	libft $(NAME)
 
@@ -26,7 +28,7 @@ libft:
 		@make -C libft
 
 $(NAME):	$(SRCS:.c=.o)
-			$(CC) -I./include -g $(SRCS) -lmlx -lXext -lX11 libft/libft.a -o $(NAME)
+			$(CC) -g3 $(SRCS) -lmlx -lXext -lX11 libft/libft.a -o $(NAME)
 
 clean:
 			rm -drf $(SRCS:.c=.o)

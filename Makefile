@@ -13,14 +13,15 @@ Q		= KEY_Q=113
 NAME	=	so_long
 
 SRCS	=	srcs/main.c srcs/parser/parser.c \
-			srcs/error/error.c
+			srcs/error/error.c \
+			srcs/utils.c
 
 CC		= gcc
 
 CFLAGS	= -Wall -Wextra -Werror
 
 %.o: %.c libft/libft.a Makefile
-	$(CC) $< -c -o $@
+	$(CC) -I/usr/include -Imlx -O3 $< -c -o $@
 
 all:	libft $(NAME)
 
@@ -28,7 +29,7 @@ libft:
 		@make -C libft
 
 $(NAME):	$(SRCS:.c=.o)
-			$(CC) -g3 $(SRCS) -lmlx -lXext -lX11 libft/libft.a -o $(NAME)
+			$(CC) -g3 $(SRCS) libft/libft.a -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
 
 clean:
 			rm -drf $(SRCS:.c=.o)

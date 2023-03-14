@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/13 05:11:35 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:34:18 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,19 @@ typedef struct s_layout
 	int	columns;
 }				t_layout;
 
+typedef struct s_player
+{
+	void	*img;
+	int		x;
+	int		y;
+}				t_player;
+
 typedef struct s_game
 {
 	void		*id;
 	void		*w_id;
 	t_layout	*backgrnd;
-	void		*pacman;
+	t_player	*pacman;
 	void		*wall;
 	int			moves_nbr;
 	char		**map;
@@ -62,5 +69,6 @@ void	error_handler(char *msg);
 void	ft_free_splitted_map(char **tab);
 
 char	**check_map(char *file, t_layout *map_lay);
+void	new_position(int x, int y, t_game *game);
 
 #endif

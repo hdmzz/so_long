@@ -6,17 +6,20 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/14 16:34:18 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/15 15:21:34 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include <X11/Xlib.h>
-#include <sys/ipc.h>
-#include <sys/shm.h>
-#include <X11/extensions/XShm.h>
+// #include <X11/Xlib.h>
+// #include <sys/ipc.h>
+// #include <sys/shm.h>
+//#include <X11/extensions/XShm.h>
+# include "../libft/libft.h"
+# include <stdio.h>
+# include <mlx.h>
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -29,10 +32,8 @@
 # define KEY_RIGHT 65363
 # define KEY_R 114
 # define KEY_Q 113
+# define SIZE 50
 
-# include "../libft/libft.h"
-# include <stdio.h>
-# include <mlx.h>
 
 typedef struct s_layout
 {
@@ -57,6 +58,7 @@ typedef struct s_game
 	void		*w_id;
 	t_layout	*backgrnd;
 	t_player	*pacman;
+	void		*water;
 	void		*wall;
 	int			moves_nbr;
 	char		**map;

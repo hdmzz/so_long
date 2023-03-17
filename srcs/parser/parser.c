@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/13 03:04:49 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/15 18:09:15 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static char	**splitter(t_layout *map_lay, int fd)
 	{
 		res = ft_strjoin(res, line);
 		line = get_next_line(fd);
-	}
+	} 
 	while (res[i++])
 	{
 		if (res[i] == 'C')
@@ -97,6 +97,7 @@ char	**check_map(char *file, t_layout *map_lay)
 
 	is_ber_file(file);
 	fd = open(file, O_RDONLY);
+	ft_printf("%d\n", fd);
 	ft_init_layout(map_lay);
 	map = splitter(map_lay, fd);
 	if (!map)
@@ -110,3 +111,19 @@ char	**check_map(char *file, t_layout *map_lay)
 	close(fd);
 	return (map);
 }
+// char	**checkmap(char *file, t_layout *map_lay)
+// {
+// 	char **map;
+	
+// 	map = splitter(map_lay, fd);
+// 	if (!map)
+// 		exit(EXIT_FAILURE);
+// 	if (map_lay->enter != 1 || map_lay->exit != 1)
+// 	{
+// 		ft_free_splitted_map(map);
+// 		error_handler("Error\nEnter or exit not ok\n");
+// 	}
+// 	check_walls(map, map_lay);
+// 	close(fd);
+// 	return (map);
+// }

@@ -14,7 +14,8 @@ NAME	=	so_long
 
 SRCS	=	srcs/main.c srcs/parser/parser.c \
 			srcs/error/error.c \
-			srcs/utils.c
+			srcs/utils.c \
+			srcs/move.c
 
 CC		= gcc
 
@@ -26,6 +27,9 @@ CFLAGS	= -Wall -Wextra -Werror
 all:	libft $(NAME)
 
 libft:
+		@if [ ! -d libft ]; then \
+			git clone https://github.com/hdmzz/libft.git; \
+		fi
 		@make -C libft
 
 $(NAME):	$(SRCS:.c=.o)

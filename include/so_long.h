@@ -6,17 +6,13 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/15 15:21:34 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/18 22:38:22 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-// #include <X11/Xlib.h>
-// #include <sys/ipc.h>
-// #include <sys/shm.h>
-//#include <X11/extensions/XShm.h>
 # include "../libft/libft.h"
 # include <stdio.h>
 # include <mlx.h>
@@ -45,9 +41,16 @@ typedef struct s_layout
 	int	columns;
 }				t_layout;
 
+typedef struct s_position
+{
+	int	x;
+	int	y;
+}				t_position;
+
 typedef struct s_player
 {
 	void	*img;
+	t_position	*curr_position;
 	int		x;
 	int		y;
 }				t_player;
@@ -71,6 +74,12 @@ void	error_handler(char *msg);
 void	ft_free_splitted_map(char **tab);
 
 char	**check_map(char *file, t_layout *map_lay);
-void	new_position(int x, int y, t_game *game);
+void	new_position(int x, int y, t_game *game, t_position *position);
+
+void	ft_move_left(t_game *game);
+void	ft_move_right(t_game *game);
+void	ft_move_up(t_game *game);
+void	ft_move_down(t_game *game);
+
 
 #endif

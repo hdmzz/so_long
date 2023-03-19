@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/19 03:16:24 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/19 09:45:54 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ typedef struct s_game
 	int			nxt_dir;
 }				t_game;
 
+void	ft_init_map(t_game *game, int pac_pos);
+void	ft_put_pac(t_game *game);
+void	ft_put_map(t_game *game);
+int	ft_update(t_game *game);
+
 void	error_handler(char *msg);
 void	ft_free_splitted_map(char **tab);
 
@@ -83,5 +88,6 @@ void	ft_move_up(t_game *game);
 void	ft_move_down(t_game *game);
 
 int	legal_move(t_game *game, int x, int y);
+int	pathfinder(t_game *game, int y, int x);
 
 #endif

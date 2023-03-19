@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 02:15:09 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/19 03:16:13 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/19 05:29:48 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,9 @@ int	legal_move(t_game *game, int x, int y)
 	if (game->map[y][x] == '1')
 		return (0);
 	return (1);
+}
+
+void	check_collectibles(t_game *game)
+{
+	
 }

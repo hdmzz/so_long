@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:17:00 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/19 00:19:08 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/19 09:45:39 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,66 +34,6 @@ int		key_hook(int key, t_game *game)
 		ft_move_up(game);
 }
 
-void	ft_init_map(t_game *game, int pac_pos)
-{
-	int	x;
-	int	y;
-	t_position	position;
-
-	y = 0;
-	while (game->map[y])
-	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			if ( game->map[y][x] == '1')
-				mlx_put_image_to_window(game->id, game->w_id, game->wall, x * SIZE, y * SIZE);
-			if (game->map[y][x] == '0')
-				mlx_put_image_to_window(game->id, game->w_id, game->water, x * SIZE, y * SIZE);
-			if (pac_pos && game->map[y][x] == 'P')
-				new_position(x, y, game, &position);
-			x++;
-		}
-		y++;
-	}
-	game->pacman->curr_position = &position;
-}
-
-void	ft_put_pac(t_game *game)
-{
-	mlx_put_image_to_window(game->id, game->w_id, game->pacman->img, game->pacman->x * SIZE, game->pacman->y * SIZE);
-}
-
-void	ft_put_map(t_game *game)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (game->map[y])
-	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			if ( game->map[y][x] == '1')
-				mlx_put_image_to_window(game->id, game->w_id, game->wall, x * SIZE, y * SIZE);
-			if (game->map[y][x] == '0')
-				mlx_put_image_to_window(game->id, game->w_id, game->water, x * SIZE, y * SIZE);
-			if (game->map[y][x] == 'C')
-				mlx_put_image_to_window(game->id, game->w_id, game->collect, x * SIZE, y * SIZE);
-			x++;
-		}
-		y++;
-	}
-}
-
-int	ft_update(t_game *game)
-{
-	ft_put_map(game);
-	ft_put_pac(game);
-	return (0);
-}
-
 int	main(int ac, char **av)
 {
 	t_game		game;
@@ -101,21 +41,22 @@ int	main(int ac, char **av)
 	int size = SIZE;
 	char *map = { "1111111111\n10C0010001\n1001110111\n1000P01C11\n1111111111"};//uniquement pour phase de develeoppement
 	//char **lay = check_map(av[1], &layout);
-	void *mlx = mlx_init();
-	void *mlx_win = mlx_new_window(mlx, 500, 500, "help");
-	game.pacman = malloc(sizeof(t_player));
-	game.wall = mlx_xpm_file_to_image(mlx, "../img/wall.xpm", &size, &size);
-	game.pacman->img = mlx_xpm_file_to_image(mlx, "../img/pacman.xpm", &size, &size);
-	game.water = mlx_xpm_file_to_image(mlx, "../img/water.xpm", &size, &size);
-	game.collect = mlx_xpm_file_to_image(mlx, "../img/fish.xpm", &size, &size);
+	// void *mlx = mlx_init();
+	// void *mlx_win = mlx_new_window(mlx, 500, 500, "help");
+	// game.pacman = malloc(sizeof(t_player));
+	// game.wall = mlx_xpm_file_to_image(mlx, "../img/wall.xpm", &size, &size);
+	// game.pacman->img = mlx_xpm_file_to_image(mlx, "../img/pacman.xpm", &size, &size);
+	// game.water = mlx_xpm_file_to_image(mlx, "../img/water.xpm", &size, &size);
+	// game.collect = mlx_xpm_file_to_image(mlx, "../img/fish.xpm", &size, &size);
 	game.map = ft_split(map, '\n');
-	game.id = mlx;
-	game.w_id = mlx_win;
-	ft_init_map(&game, 1);
-	ft_printf("%d\n", game.pacman->curr_position->x);
-	ft_put_pac(&game);
-	mlx_loop_hook(game.id, ft_update, (void*)&game);
-	mlx_hook(game.w_id, 17, 0, close_game, (void*)&game);
-	mlx_key_hook(mlx_win, key_hook, (void*)&game);
-	mlx_loop(game.id);
+	pathfinder(&game, 3, 4);
+	// game.id = mlx;
+	// game.w_id = mlx_win;
+	// ft_init_map(&game, 1);
+	// ft_printf("%d\n", game.pacman->curr_position->x);
+	// ft_put_pac(&game);
+	// mlx_loop_hook(game.id, ft_update, (void*)&game);
+	// mlx_hook(game.w_id, 17, 0, close_game, (void*)&game);
+	// mlx_key_hook(mlx_win, key_hook, (void*)&game);
+	// mlx_loop(game.id);
 }

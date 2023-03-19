@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:26:34 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/19 10:09:05 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/19 10:35:22 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,35 @@ static char	**path_clone(char **map)
 		return (NULL);
 	while (map[i])
 		clone[i++] = ft_strdup(map[i]);
-	i = 0;
-	while (clone[i])
-		ft_memset(clone[i++], '0', map_len);
 	return (clone);
 }
 
-static int	find_path(char **real_map, char **path, int y, int x)//il faut que x et y soit les coordo de P
+static void print_map(char **map)
 {
-	if (real_map[y][x] == '0' || real_map[y][x] == 'P' || real_map[y][x] == 'C')
+	int i = 0;
+	while (map[i])
 	{
-		path[y][x] = '1';
-		if (find_path(real_map, path, y, x + 1) == 1)//right
-			return (1);
-		if (find_path(real_map, path, y + 1, x) == 1)//down
-			return (1);
-		if (find_path(real_map, path, y - 1, x) == 1)//up
-			return (1);
-		if (find_path(real_map, path, y, x - 1) == 1)//left
-			return (1);
+		ft_printf("%s\n", map[i]);
+		i++;
 	}
-	if (real_map[y][x] == 'E')
-		return (2);
+}
+
+static int	find_path(char **path, int y, int x)//il faut que x et y soit les coordo de P
+{
+	print_map(path);
+	ft_printf("\n");
+	ft_printf("\n");
+	if (path[y][x] == '1' || path[y][x] == '3')//1 - wall 3 - taken path
+		return (0);
+	if (path[y][x] == 'E')//si attein la sortie n'appelera pas de nvx la fonction
+		return (1);
+	path[y][x] = '3';//taken path;
+	if (find_path(path, y - 1, x) == 1 || find_path(path, y + 1, x) == 1)
+		return (1);
+	if (find_path(path, y, x - 1) == 1 || find_path(path, y, x + 1) == 1)
+		return (1);
+	path[y][x] = '0';//si aucun des mouvement n'est possible on remet 0 et on retourn false
+	//donc la fonction recursive revient sur sa trace
 	return (0);
 }
 
@@ -61,7 +68,7 @@ int	pathfinder(t_game *game, int y, int x)
 
 	ft_printf("%c\n", game->map[y][x]);//
 	path = path_clone(game->map);
-	is_path = find_path(game->map, path, y, x);
+	is_path = find_path( path, y, x);
 	while (*path)
 	{
 		ft_printf("%s\n", *path);

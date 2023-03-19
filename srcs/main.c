@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:17:00 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/18 23:54:52 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/19 00:19:08 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	ft_put_map(t_game *game)
 				mlx_put_image_to_window(game->id, game->w_id, game->wall, x * SIZE, y * SIZE);
 			if (game->map[y][x] == '0')
 				mlx_put_image_to_window(game->id, game->w_id, game->water, x * SIZE, y * SIZE);
+			if (game->map[y][x] == 'C')
+				mlx_put_image_to_window(game->id, game->w_id, game->collect, x * SIZE, y * SIZE);
 			x++;
 		}
 		y++;
@@ -97,14 +99,15 @@ int	main(int ac, char **av)
 	t_game		game;
 	t_layout	layout;
 	int size = SIZE;
-	char *map = { "1111111111\n1000010001\n1001110111\n1000P00111\n1111111111"};//uniquement pour phase de develeoppement
+	char *map = { "1111111111\n10C0010001\n1001110111\n1000P01C11\n1111111111"};//uniquement pour phase de develeoppement
 	//char **lay = check_map(av[1], &layout);
 	void *mlx = mlx_init();
 	void *mlx_win = mlx_new_window(mlx, 500, 500, "help");
-	game.wall = mlx_xpm_file_to_image(mlx, "../img/wall.xpm", &size, &size);
 	game.pacman = malloc(sizeof(t_player));
+	game.wall = mlx_xpm_file_to_image(mlx, "../img/wall.xpm", &size, &size);
 	game.pacman->img = mlx_xpm_file_to_image(mlx, "../img/pacman.xpm", &size, &size);
 	game.water = mlx_xpm_file_to_image(mlx, "../img/water.xpm", &size, &size);
+	game.collect = mlx_xpm_file_to_image(mlx, "../img/fish.xpm", &size, &size);
 	game.map = ft_split(map, '\n');
 	game.id = mlx;
 	game.w_id = mlx_win;

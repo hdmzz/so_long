@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/18 22:38:22 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/19 03:16:24 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_game
 	t_player	*pacman;
 	void		*water;
 	void		*wall;
+	void		*collect;
 	int			moves_nbr;
 	char		**map;
 	int			width;
@@ -81,5 +82,6 @@ void	ft_move_right(t_game *game);
 void	ft_move_up(t_game *game);
 void	ft_move_down(t_game *game);
 
+int	legal_move(t_game *game, int x, int y);
 
 #endif

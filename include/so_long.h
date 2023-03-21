@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/19 09:45:54 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:26:33 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ typedef struct s_game
 	char		**map;
 	int			width;
 	int			height;
-	int			nxt_dir;
+	int			nb_collectibles;
+	int			collected; 
 }				t_game;
 
 void	ft_init_map(t_game *game, int pac_pos);

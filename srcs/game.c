@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 05:31:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/19 05:32:55 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/20 12:48:11 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_init_map(t_game *game, int pac_pos)
 		y++;
 	}
 	game->pacman->curr_position = &position;
+	game->moves_nbr = 0;
 }
 
 void	ft_put_pac(t_game *game)

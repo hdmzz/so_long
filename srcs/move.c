@@ -6,12 +6,12 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 22:31:35 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/20 12:44:01 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/21 11:56:33 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
+ 
 void	ft_move_left(t_game *game)
 {
 	int	x;

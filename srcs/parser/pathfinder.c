@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:26:34 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/21 10:05:47 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/21 13:35:54 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	pathfinder(t_game *game, int y, int x)
 	ft_printf("%c\n", game->map[y][x]);//
 	path = path_clone(game->map);
 	is_path = find_path( path, y, x);
+	ft_free_splitted_map(path);
 	if (is_path)
 		return (1);
 	return (0);

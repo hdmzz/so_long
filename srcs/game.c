@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 05:31:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/20 12:48:11 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:11:09 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ void	ft_init_map(t_game *game, int pac_pos)
 				mlx_put_image_to_window(game->id, game->w_id, game->water, x * SIZE, y * SIZE);
 			if (pac_pos && game->map[y][x] == 'P')
 				new_position(x, y, game, &position);
+			if (game->map[y][x] == 'C')
+			{
+				mlx_put_image_to_window(game->id, game->w_id, game->fish, x * SIZE, y * SIZE);
+				game->nb_collectibles += 1;
+			}
 			x++;
 		}
 		y++;
@@ -49,7 +54,7 @@ void	ft_put_map(t_game *game)
 	int	y;
 
 	y = 0;
-	while (game->map[y])
+	while  (game->map[y])
 	{
 		x = 0;
 		while (game->map[y][x])
@@ -59,7 +64,7 @@ void	ft_put_map(t_game *game)
 			if (game->map[y][x] == '0')
 				mlx_put_image_to_window(game->id, game->w_id, game->water, x * SIZE, y * SIZE);
 			if (game->map[y][x] == 'C')
-				mlx_put_image_to_window(game->id, game->w_id, game->collect, x * SIZE, y * SIZE);
+				mlx_put_image_to_window(game->id, game->w_id, game->fish, x * SIZE, y * SIZE);
 			x++;
 		}
 		y++;

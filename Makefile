@@ -38,7 +38,7 @@ minilib:
 		@make -C minilibx-linux
 
 $(NAME):	$(SRCS:.c=.o)
-			$(CC) -g $(SRCS) libft/libft.a -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+			$(CC) -g $(SRCS) libft/libft.a -Lmlx_linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 clean:
 			rm -drf $(SRCS:.c=.o)

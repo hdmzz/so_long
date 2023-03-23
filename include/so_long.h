@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/23 11:27:08 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:38:04 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include "../libft/libft.h"
 # include <stdio.h>
-# include "../mlx_linux/mlx.h"
+//# include "../mlx_linux/mlx.h"
+# include <mlx.h>
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -36,9 +37,10 @@ typedef struct s_layout
 	int	collectibles;
 	int	exit;
 	int	enter;
-	int	enemies;
+	int	player;
 	int	rows;
 	int	columns;
+	char	**map; 
 }				t_layout;
 
 typedef struct s_position
@@ -81,7 +83,7 @@ int	ft_update(t_game *game);
 void	error_handler(char *msg);
 void	ft_free_splitted_map(char **tab);
 
-char	**check_map(char *file, t_layout *map_lay);
+void	check_map(char *file, t_layout *map_lay);
 void	new_position(int x, int y, t_game *game, t_position *position);
 
 void	ft_move_left(t_game *game);

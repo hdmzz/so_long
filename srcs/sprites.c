@@ -6,13 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 00:03:50 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/13 00:21:28 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:52:38 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
-
-void	ft_put_map(t_game *game)
-{
-	
-}

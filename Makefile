@@ -22,10 +22,9 @@ SRCS	=	srcs/main.c srcs/parser/parser.c \
 
 CC		= gcc
 
-CFLAGS	= -Wall -Wextra -Werror
 
-%.o: %.c libft/libft.a Makefile
-	$(CC) -I/usr/include -Imlx -O3 $< -c -o $@
+%.o: %.c libft/libft.a  minilibx-linux/libmlx.a Makefile
+	$(CC) -c $< -o $@
 
 all:	libft $(NAME)
 
@@ -35,8 +34,11 @@ libft:
 		fi
 		@make -C libft
 
+minilib:
+		@make -C minilibx-linux
+
 $(NAME):	$(SRCS:.c=.o)
-			$(CC) -g3 $(SRCS) libft/libft.a -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
+			$(CC) -g $(SRCS) libft/libft.a -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 clean:
 			rm -drf $(SRCS:.c=.o)
@@ -45,6 +47,7 @@ clean:
 fclean:	clean
 		rm -drf $(NAME)
 		@make fclean -C libft
+		@make fclean -C mlx_linux
 
 re:		fclean all
 

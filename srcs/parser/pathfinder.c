@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:26:34 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/21 13:35:54 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:27:39 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void print_map(char **map)
 
 static int	find_path(char **path, int y, int x)//il faut que x et y soit les coordo de P
 {
+	// sleep(2);
 	print_map(path);
 	ft_printf("\n");
 	ft_printf("\n");

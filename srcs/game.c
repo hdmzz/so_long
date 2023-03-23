@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 05:31:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/21 15:11:09 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/23 13:36:36 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_init_map(t_game *game, int pac_pos)
 
 void	ft_put_pac(t_game *game)
 {
-	mlx_put_image_to_window(game->id, game->w_id, game->pacman->img, game->pacman->x * SIZE, game->pacman->y * SIZE);
+	mlx_put_image_to_window(game->id, game->w_id, game->player, game->pacman->x * SIZE, game->pacman->y * SIZE);
 }
 
 void	ft_put_map(t_game *game)

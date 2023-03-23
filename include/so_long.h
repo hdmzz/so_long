@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/21 17:01:54 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/23 11:27:08 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 # include <stdio.h>
-# include <mlx.h>
+# include "../mlx_linux/mlx.h"
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -61,6 +61,7 @@ typedef struct s_game
 	void		*w_id;
 	t_layout	*backgrnd;
 	t_player	*pacman;
+	void		*player;
 	void		*water;
 	void		*wall;
 	void		*fish;

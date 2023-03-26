@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/23 17:29:46 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/26 10:39:59 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,25 @@ static void	is_ber_file(char *map)
 	}
 }
 
-static void	check_walls(char **rows, t_layout *map_lay)
+static void	check_walls(t_layout *map_lay)
 {
 	int		i;
 	size_t	len;
 
 	i = 0;
-	len = ft_strlen(rows[0]);
-	while (rows[i])
+	len = ft_strlen(map_lay->map[0]);
+	while (map_lay->map[i])
 		i++;
-	if (ft_strspn(rows[0], "1") != len || ft_strspn(rows[i - 1], "1") != len)
+	if (ft_strspn(map_lay->map[0], "1") != len || ft_strspn(map_lay->map[i - 1], "1") != len)
 	{
 		error_handler("Error\nError Walls\n");
-		ft_free_splitted_map(rows);
-	}
-	i = 0;
-	while (rows[i])
-	{
-		if (ft_strlen(rows[i]) != len)
-			error_handler("Error\nMap is not rectangular\n");
-		if ((rows[i][0] != '1') || (rows[i][len - 1] != '1'))
-			error_handler("Error\nThe map isn't closed by walls\n");
-		i++;
+		ft_free_splitted_map(map_lay->map);
 	}
 	map_lay->rows = i;
 	map_lay->columns = len;
 }
 
-static char	**splitter(t_layout *map_lay, int fd)
+static void	splitter(t_layout *map_lay, int fd)//split the file into slplit
 {
 	char	**map;
 	char	*line;
@@ -71,26 +62,17 @@ static char	**splitter(t_layout *map_lay, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
-	while (res[i++])
-	{
-		if (res[i] == 'C')
-			map_lay->collectibles += 1;
-		if (res[i] == 'E')
-			map_lay->exit += 1;
-		if (res[i] == 'P')
-			map_lay->player += 1;
-	}
 	map = ft_split(res, '\n');
 	free(res);
 	free(line);
-	return (map);
+	map_lay->map = map;
+	ft_layout(map_lay);
 }
-
+ 
 static void	ft_init_layout(t_layout *map_lay)
 {
 	map_lay->collectibles = 0;
 	map_lay->exit = 0;
-	map_lay->enter = 0;
 	map_lay->player = 0;
 	map_lay->rows = 0;
 	map_lay->columns = 0;
@@ -98,21 +80,19 @@ static void	ft_init_layout(t_layout *map_lay)
 
 void	check_map(char *file, t_layout *map_lay)
 {
-	char	**map;
 	int		fd;
 
 	is_ber_file(file);
 	fd = open(file, O_RDONLY);
-	ft_init_layout(map_lay);
-	map = splitter(map_lay, fd);
-	if (!map)
+	ft_init_layout(map_lay);//layout init a zero
+	splitter(map_lay, fd);
+	if (!map_lay->map)
 		exit(EXIT_FAILURE);
 	if (map_lay->player != 1 || map_lay->exit != 1 || map_lay->collectibles < 1)
 	{
-		ft_free_splitted_map(map);
+		ft_free_splitted_map(map_lay->map);
 		error_handler("Error\nEnter or exit not ok\n");
 	}
-	check_walls(map, map_lay);
+	check_walls(map_lay);
 	close(fd);
-	map_lay->map = map;
 }

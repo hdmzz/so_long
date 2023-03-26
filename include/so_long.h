@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/23 16:38:04 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/26 10:13:52 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,23 @@
 # define KEY_Q 113
 # define SIZE 50
 
-
-typedef struct s_layout
-{
-	int	collectibles;
-	int	exit;
-	int	enter;
-	int	player;
-	int	rows;
-	int	columns;
-	char	**map; 
-}				t_layout;
-
 typedef struct s_position
 {
 	int	x;
 	int	y;
 }				t_position;
+
+typedef struct s_layout
+{
+	int			collectibles;
+	int			exit;
+	int			player;
+	int			rows;
+	int			columns;
+	t_position	*player_position;
+	char		**map;
+}				t_layout;
+
 
 typedef struct s_player
 {
@@ -67,6 +67,7 @@ typedef struct s_game
 	void		*water;
 	void		*wall;
 	void		*fish;
+	void		*exit;
 	int			moves_nbr;
 	char		**map;
 	int			width;
@@ -78,13 +79,16 @@ typedef struct s_game
 void	ft_init_map(t_game *game, int pac_pos);
 void	ft_put_pac(t_game *game);
 void	ft_put_map(t_game *game);
-int	ft_update(t_game *game);
+int		ft_update(t_game *game);
 
 void	error_handler(char *msg);
 void	ft_free_splitted_map(char **tab);
+int		is_rectangular(t_layout *layout);
 
 void	check_map(char *file, t_layout *map_lay);
 void	new_position(int x, int y, t_game *game, t_position *position);
+
+void	ft_layout(t_layout *layout);
 
 void	ft_move_left(t_game *game);
 void	ft_move_right(t_game *game);
@@ -92,7 +96,7 @@ void	ft_move_up(t_game *game);
 void	ft_move_down(t_game *game);
 
 int		legal_move(t_game *game, int x, int y);
-int		pathfinder(t_game *game, int y, int x);
+int		pathfinder(t_layout *layout);
 
 int		close_game(t_game *game);
 

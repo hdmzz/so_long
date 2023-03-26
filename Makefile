@@ -13,6 +13,7 @@ Q		= KEY_Q=113
 NAME	=	so_long
 
 SRCS	=	srcs/main.c srcs/parser/parser.c \
+			srcs/parser/parser2.c \
 			srcs/error/error.c \
 			srcs/utils.c \
 			srcs/move.c \

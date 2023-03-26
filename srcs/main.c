@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:17:00 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/23 18:04:09 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/26 10:27:15 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_free_img(t_game *game)
 	mlx_destroy_image(game->id, game->water);
 	mlx_destroy_image(game->id, game->wall);
 	mlx_destroy_image(game->id, game->fish);
+	mlx_destroy_image(game->id, game->exit);
 }
 
 int		close_game(t_game *game)
@@ -55,7 +56,7 @@ void	ft_init_game(t_game *game, t_layout *layout)
 	game->height = layout->rows;
 	game->width = layout->columns;
 	game->pacman = malloc(sizeof(t_player));//free
-	game->nb_collectibles = 0;
+	game->nb_collectibles = layout->collectibles;
 	game->collected = 0;
 	game->id = mlx_init();
 	game->w_id = mlx_new_window(game->id, game->width * size, game->height * size, "help");
@@ -63,6 +64,7 @@ void	ft_init_game(t_game *game, t_layout *layout)
 	game->player = mlx_xpm_file_to_image(game->id, "./img/dolphin.xpm", &size, &size);
 	game->water = mlx_xpm_file_to_image(game->id, "./img/water.xpm", &size, &size);
 	game->fish = mlx_xpm_file_to_image(game->id, "./img/fish.xpm", &size, &size);
+	game->exit = mlx_xpm_file_to_image(game->id, "./img/exit.xpm", &size, &size);
 	game->map = layout->map;
 }
 
@@ -74,7 +76,6 @@ int	main(int ac, char **av)
 	{
 		check_map(av[1], &layout);
 		ft_init_game(&game, &layout);
-		//pathfinder(&game, 3, 4);
 		ft_init_map(&game, 1);
 		ft_put_pac(&game);
 		mlx_loop_hook(game.id, ft_update, (void*)&game);
@@ -82,5 +83,4 @@ int	main(int ac, char **av)
 		mlx_key_hook(game.w_id, key_hook, (void*)&game);
 		mlx_loop(game.id);
 	}
-
 }

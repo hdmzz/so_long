@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 05:31:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/23 13:36:36 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/23 19:29:59 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,23 @@ void	ft_init_map(t_game *game, int pac_pos)
 	int	y;
 	t_position	position;
 
-	y = 0;
-	while (game->map[y])
+	y = -1;
+	while (game->map[++y])
 	{
-		x = 0;
-		while (game->map[y][x])
+		x = -1;
+		while (game->map[y][++x])
 		{
 			if ( game->map[y][x] == '1')
 				mlx_put_image_to_window(game->id, game->w_id, game->wall, x * SIZE, y * SIZE);
+			if ( game->map[y][x] == 'E')
+				mlx_put_image_to_window(game->id, game->w_id, game->exit, x * SIZE, y * SIZE);
 			if (game->map[y][x] == '0')
 				mlx_put_image_to_window(game->id, game->w_id, game->water, x * SIZE, y * SIZE);
 			if (pac_pos && game->map[y][x] == 'P')
 				new_position(x, y, game, &position);
 			if (game->map[y][x] == 'C')
-			{
 				mlx_put_image_to_window(game->id, game->w_id, game->fish, x * SIZE, y * SIZE);
-				game->nb_collectibles += 1;
-			}
-			x++;
 		}
-		y++;
 	}
 	game->pacman->curr_position = &position;
 	game->moves_nbr = 0;
@@ -61,6 +58,8 @@ void	ft_put_map(t_game *game)
 		{
 			if ( game->map[y][x] == '1')
 				mlx_put_image_to_window(game->id, game->w_id, game->wall, x * SIZE, y * SIZE);
+			if ( game->map[y][x] == 'E')
+				mlx_put_image_to_window(game->id, game->w_id, game->exit, x * SIZE, y * SIZE);
 			if (game->map[y][x] == '0')
 				mlx_put_image_to_window(game->id, game->w_id, game->water, x * SIZE, y * SIZE);
 			if (game->map[y][x] == 'C')

@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/26 10:39:59 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/27 14:05:03 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,6 @@ static void	is_ber_file(char *map)
 	}
 }
 
-static void	check_walls(t_layout *map_lay)
-{
-	int		i;
-	size_t	len;
-
-	i = 0;
-	len = ft_strlen(map_lay->map[0]);
-	while (map_lay->map[i])
-		i++;
-	if (ft_strspn(map_lay->map[0], "1") != len || ft_strspn(map_lay->map[i - 1], "1") != len)
-	{
-		error_handler("Error\nError Walls\n");
-		ft_free_splitted_map(map_lay->map);
-	}
-	map_lay->rows = i;
-	map_lay->columns = len;
-}
 
 static void	splitter(t_layout *map_lay, int fd)//split the file into slplit
 {
@@ -68,7 +51,7 @@ static void	splitter(t_layout *map_lay, int fd)//split the file into slplit
 	map_lay->map = map;
 	ft_layout(map_lay);
 }
- 
+
 static void	ft_init_layout(t_layout *map_lay)
 {
 	map_lay->collectibles = 0;
@@ -76,6 +59,29 @@ static void	ft_init_layout(t_layout *map_lay)
 	map_lay->player = 0;
 	map_lay->rows = 0;
 	map_lay->columns = 0;
+}
+
+void	check_walls(t_layout *map_lay)
+{
+	int		i;
+	size_t	len;
+
+	i = -1;
+	len = ft_strlen(map_lay->map[0]);
+	while (map_lay->map[++i])
+	{
+		if (ft_strspn(map_lay->map[i], "10EPC") != len)
+			error_parsing(map_lay, "Error map must be made of 01ECP");
+		if ((map_lay->map[i][0] != '1' && map_lay->map[i][len - 1] != '1') \
+			|| (map_lay->map[i][0] != '1' || map_lay->map[i][len - 1] != '1'))
+			error_parsing(map_lay, "Error\nMap isn't close by walls");
+	}
+	if (ft_strspn(map_lay->map[0], "1") != len || ft_strspn(map_lay->map[i - 1], "1") != len)
+	{
+		error_handler("Error\nError Walls\n");
+		ft_free_splitted_map(map_lay->map);
+	}
+	
 }
 
 void	check_map(char *file, t_layout *map_lay)
@@ -93,6 +99,5 @@ void	check_map(char *file, t_layout *map_lay)
 		ft_free_splitted_map(map_lay->map);
 		error_handler("Error\nEnter or exit not ok\n");
 	}
-	check_walls(map_lay);
 	close(fd);
 }

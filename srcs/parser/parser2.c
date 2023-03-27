@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 21:09:51 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/26 10:55:17 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:55:57 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,16 @@ void	player_position(int x, int y, t_layout *layout)
 	layout->player += 1;
 }
 
+void	error_parsing(t_layout *layout, char *msg)
+{
+	if (layout->player_position == NULL)
+		free(layout->player_position);
+	ft_free_splitted_map(layout->map);
+	error_handler(msg);
+}
+
 void	ft_layout(t_layout *layout)//compte nombre de colonnes de lignes de collec exit player and x y
-{//verifie rectangulaire
+{
 	t_position	position;
 	int	y;
 	int	x ;
@@ -54,10 +62,8 @@ void	ft_layout(t_layout *layout)//compte nombre de colonnes de lignes de collec 
 	}
 	layout->rows = y;
 	layout->columns = x;
-	if (!is_rectangular(layout) || !pathfinder(layout))
-	{
-		ft_free_splitted_map(layout->map);
-		error_handler("Map isn't rectangular\n");
-	}
+	check_walls(layout);
+	if (!is_rectangular(layout) || !pathfinder(layout))//le pathfinder ne verifie que les caracteres 10ECP donc si il y a autre chose ds la carte on continue a essayer par exemple y - 1 si y == 0 ==>segfault
+		error_parsing(layout, "Error\nMap isn't rectangular or isn't playable");
 	free(layout->player_position);
 }

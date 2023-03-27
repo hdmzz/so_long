@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:17:00 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/26 10:27:15 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/27 14:30:50 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_init_game(t_game *game, t_layout *layout)
 	size = SIZE;
 	game->height = layout->rows;
 	game->width = layout->columns;
-	game->pacman = malloc(sizeof(t_player));//free
+	game->pacman = malloc(sizeof(t_player));
 	game->nb_collectibles = layout->collectibles;
 	game->collected = 0;
 	game->id = mlx_init();

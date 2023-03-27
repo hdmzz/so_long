@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:26:34 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/26 11:03:03 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/27 14:53:10 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ int	pathfinder(t_layout *layout)
 	int		is_path;
 
 	path = path_clone(layout->map);
-	is_path = find_path(path, layout->player_position->y, \
-		layout->player_position->x);
+	is_path = find_path(path, layout->player_position->y, layout->player_position->x);
 	ft_free_splitted_map(path);
 	return (is_path);
 }

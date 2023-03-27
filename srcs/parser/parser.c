@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/27 14:05:03 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/27 14:59:49 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	splitter(t_layout *map_lay, int fd)//split the file into slplit
 	free(line);
 	map_lay->map = map;
 	ft_layout(map_lay);
+	free(map_lay->player_position);
 }
 
 static void	ft_init_layout(t_layout *map_lay)
@@ -81,7 +82,6 @@ void	check_walls(t_layout *map_lay)
 		error_handler("Error\nError Walls\n");
 		ft_free_splitted_map(map_lay->map);
 	}
-	
 }
 
 void	check_map(char *file, t_layout *map_lay)

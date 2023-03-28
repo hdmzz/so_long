@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/27 14:59:49 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/28 22:01:28 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	check_walls(t_layout *map_lay)
 	while (map_lay->map[++i])
 	{
 		if (ft_strspn(map_lay->map[i], "10EPC") != len)
-			error_parsing(map_lay, "Error map must be made of 01ECP");
+			error_parsing(map_lay, "Error map must be made of 01ECP\n");
 		if ((map_lay->map[i][0] != '1' && map_lay->map[i][len - 1] != '1') \
 			|| (map_lay->map[i][0] != '1' || map_lay->map[i][len - 1] != '1'))
-			error_parsing(map_lay, "Error\nMap isn't close by walls");
+			error_parsing(map_lay, "Error\nMap isn't close by walls\n");
 	}
 	if (ft_strspn(map_lay->map[0], "1") != len || \
 		ft_strspn(map_lay->map[i - 1], "1") != len)

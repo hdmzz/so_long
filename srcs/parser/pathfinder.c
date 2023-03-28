@@ -6,13 +6,13 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:26:34 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/27 14:53:10 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/28 21:55:26 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-static char	**path_clone(char **map)
+char	**path_clone(char **map)
 {
 	int		map_len;
 	int		rows;

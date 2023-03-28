@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 21:09:51 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/27 15:02:32 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/28 22:06:09 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ void	ft_layout(t_layout *layout)
 	layout->rows = y;
 	layout->columns = x;
 	check_walls(layout);
-	if (!is_rectangular(layout) || !pathfinder(layout))
+	if (!is_rectangular(layout) || !pathfinder(layout) || !pathfinder_collectibles(layout))
 		error_parsing(layout, "Error\nMap isn't rectangular or isn't playable");
 }

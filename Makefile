@@ -14,11 +14,12 @@ NAME	=	so_long
 
 SRCS	=	srcs/main.c srcs/parser/parser.c \
 			srcs/parser/parser2.c \
+			srcs/parser/pathfinder.c \
+			srcs/parser/pathfinder_collectibles.c \
 			srcs/error/error.c \
 			srcs/utils.c \
 			srcs/move.c \
 			srcs/legal_move.c \
-			srcs/parser/pathfinder.c \
 			srcs/game.c
 
 CC		= gcc

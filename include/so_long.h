@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/27 14:36:24 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/28 21:59:53 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "../libft/libft.h"
 # include <stdio.h>
-# include "../mlx_linux/mlx.h"
-//# include <mlx.h>
+//# include "../mlx_linux/mlx.h"
+# include <mlx.h>
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -99,6 +99,10 @@ void	ft_move_down(t_game *game);
 
 int		legal_move(t_game *game, int x, int y);
 int		pathfinder(t_layout *layout);
+int		pathfinder_collectibles(t_layout *layout);
+char	**path_clone(char **map);
+
+
 
 int		close_game(t_game *game);
 

@@ -15,8 +15,8 @@
 
 # include "../libft/libft.h"
 # include <stdio.h>
-//# include "../mlx_linux/mlx.h"
-# include <mlx.h>
+# include "../mlx_linux/mlx.h"
+//# include <mlx.h>
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -48,13 +48,12 @@ typedef struct s_layout
 	char		**map;
 }				t_layout;
 
-
 typedef struct s_player
 {
-	void	*img;
+	void		*img;
 	t_position	*curr_position;
-	int		x;
-	int		y;
+	int			x;
+	int			y;
 }				t_player;
 
 typedef struct s_game
@@ -73,7 +72,7 @@ typedef struct s_game
 	int			width;
 	int			height;
 	int			nb_collectibles;
-	int			collected; 
+	int			collected;
 }				t_game;
 
 void	ft_init_map(t_game *game, int pac_pos);

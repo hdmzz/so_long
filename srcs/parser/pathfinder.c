@@ -24,7 +24,7 @@ static char	**path_clone(char **map)
 	i = 0;
 	while (map[rows])
 		rows++;
-	clone = ft_calloc(rows + 1, sizeof(char*));
+	clone = ft_calloc(rows + 1, sizeof(char *));
 	if (!clone)
 		return (NULL);
 	while (map[i])
@@ -32,9 +32,11 @@ static char	**path_clone(char **map)
 	return (clone);
 }
 
-static void print_map(char **map)
+static void	print_map(char **map)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (map[i])
 	{
 		ft_printf("%s\n", map[i]);
@@ -42,19 +44,18 @@ static void print_map(char **map)
 	}
 }
 
-static int	find_path(char **path, int y, int x)//il faut que x et y soit les coordo de P
+static int	find_path(char **path, int y, int x)
 {
-	if (path[y][x] == '1' || path[y][x] == '3')//1 - wall 3 - taken path
+	if (path[y][x] == '1' || path[y][x] == '3')
 		return (0);
-	if (path[y][x] == 'E')//si attein la sortie n'appelera pas de nvx la fonction
+	if (path[y][x] == 'E')
 		return (1);
-	path[y][x] = '3';//taken path;
+	path[y][x] = '3';
 	if (find_path(path, y - 1, x) == 1 || find_path(path, y + 1, x) == 1)
 		return (1);
 	if (find_path(path, y, x - 1) == 1 || find_path(path, y, x + 1) == 1)
 		return (1);
-	path[y][x] = '0';//si aucun des mouvement n'est possible on remet 0 et on retourn false
-	//donc la fonction recursive revient sur sa trace
+	path[y][x] = '0';
 	return (0);
 }
 
@@ -64,7 +65,8 @@ int	pathfinder(t_layout *layout)
 	int		is_path;
 
 	path = path_clone(layout->map);
-	is_path = find_path(path, layout->player_position->y, layout->player_position->x);
+	is_path = find_path(path, layout->player_position->y, \
+		layout->player_position->x);
 	ft_free_splitted_map(path);
 	return (is_path);
 }

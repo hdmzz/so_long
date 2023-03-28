@@ -25,8 +25,7 @@ static void	is_ber_file(char *map)
 	}
 }
 
-
-static void	splitter(t_layout *map_lay, int fd)//split the file into slplit
+static void	splitter(t_layout *map_lay, int fd)
 {
 	char	**map;
 	char	*line;
@@ -77,7 +76,8 @@ void	check_walls(t_layout *map_lay)
 			|| (map_lay->map[i][0] != '1' || map_lay->map[i][len - 1] != '1'))
 			error_parsing(map_lay, "Error\nMap isn't close by walls");
 	}
-	if (ft_strspn(map_lay->map[0], "1") != len || ft_strspn(map_lay->map[i - 1], "1") != len)
+	if (ft_strspn(map_lay->map[0], "1") != len || \
+		ft_strspn(map_lay->map[i - 1], "1") != len)
 	{
 		error_handler("Error\nError Walls\n");
 		ft_free_splitted_map(map_lay->map);
@@ -90,7 +90,7 @@ void	check_map(char *file, t_layout *map_lay)
 
 	is_ber_file(file);
 	fd = open(file, O_RDONLY);
-	ft_init_layout(map_lay);//layout init a zero
+	ft_init_layout(map_lay);
 	splitter(map_lay, fd);
 	if (!map_lay->map)
 		exit(EXIT_FAILURE);

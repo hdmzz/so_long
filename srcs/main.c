@@ -86,9 +86,10 @@ int	main(int ac, char **av)
 		ft_init_game(&game, &layout);
 		ft_init_map(&game, 1);
 		ft_put_pac(&game);
-		mlx_loop_hook(game.id, ft_update, (void*)&game);
-		mlx_hook(game.w_id, 17, 0, close_game, (void*)&game);
-		mlx_key_hook(game.w_id, key_hook, (void*)&game);
+		mlx_loop_hook(game.id, ft_update, (void *)&game);
+		mlx_hook(game.w_id, 17, 0, close_game, (void *)&game);
+		mlx_key_hook(game.w_id, key_hook, (void *)&game);
 		mlx_loop(game.id);
 	}
+	return (0);
 }

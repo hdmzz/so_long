@@ -14,8 +14,8 @@
 
 void	ft_init_map(t_game *game, int pac_pos)
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
 	t_position	position;
 
 	y = -1;
@@ -24,16 +24,20 @@ void	ft_init_map(t_game *game, int pac_pos)
 		x = -1;
 		while (game->map[y][++x])
 		{
-			if ( game->map[y][x] == '1')
-				mlx_put_image_to_window(game->id, game->w_id, game->wall, x * SIZE, y * SIZE);
-			if ( game->map[y][x] == 'E')
-				mlx_put_image_to_window(game->id, game->w_id, game->exit, x * SIZE, y * SIZE);
+			if (game->map[y][x] == '1')
+				mlx_put_image_to_window(game->id, game->w_id, game->wall, \
+				x * SIZE, y * SIZE);
+			if (game->map[y][x] == 'E')
+				mlx_put_image_to_window(game->id, game->w_id, game->exit, \
+				x * SIZE, y * SIZE);
 			if (game->map[y][x] == '0')
-				mlx_put_image_to_window(game->id, game->w_id, game->water, x * SIZE, y * SIZE);
+				mlx_put_image_to_window(game->id, game->w_id, game->water, \
+				x * SIZE, y * SIZE);
 			if (pac_pos && game->map[y][x] == 'P')
 				new_position(x, y, game, &position);
 			if (game->map[y][x] == 'C')
-				mlx_put_image_to_window(game->id, game->w_id, game->fish, x * SIZE, y * SIZE);
+				mlx_put_image_to_window(game->id, game->w_id, game->fish, \
+				x * SIZE, y * SIZE);
 		}
 	}
 	game->pacman->curr_position = &position;
@@ -42,7 +46,8 @@ void	ft_init_map(t_game *game, int pac_pos)
 
 void	ft_put_pac(t_game *game)
 {
-	mlx_put_image_to_window(game->id, game->w_id, game->player, game->pacman->x * SIZE, game->pacman->y * SIZE);
+	mlx_put_image_to_window(game->id, game->w_id, game->player, \
+		game->pacman->x * SIZE, game->pacman->y * SIZE);
 }
 
 void	ft_put_map(t_game *game)
@@ -51,19 +56,23 @@ void	ft_put_map(t_game *game)
 	int	y;
 
 	y = 0;
-	while  (game->map[y])
+	while (game->map[y])
 	{
 		x = 0;
 		while (game->map[y][x])
 		{
-			if ( game->map[y][x] == '1')
-				mlx_put_image_to_window(game->id, game->w_id, game->wall, x * SIZE, y * SIZE);
-			if ( game->map[y][x] == 'E')
-				mlx_put_image_to_window(game->id, game->w_id, game->exit, x * SIZE, y * SIZE);
+			if (game->map[y][x] == '1')
+				mlx_put_image_to_window(game->id, game->w_id, game->wall, \
+				x * SIZE, y * SIZE);
+			if (game->map[y][x] == 'E')
+				mlx_put_image_to_window(game->id, game->w_id, game->exit, \
+				x * SIZE, y * SIZE);
 			if (game->map[y][x] == '0')
-				mlx_put_image_to_window(game->id, game->w_id, game->water, x * SIZE, y * SIZE);
+				mlx_put_image_to_window(game->id, game->w_id, game->water, \
+				x * SIZE, y * SIZE);
 			if (game->map[y][x] == 'C')
-				mlx_put_image_to_window(game->id, game->w_id, game->fish, x * SIZE, y * SIZE);
+				mlx_put_image_to_window(game->id, game->w_id, game->fish, \
+				x * SIZE, y * SIZE);
 			x++;
 		}
 		y++;

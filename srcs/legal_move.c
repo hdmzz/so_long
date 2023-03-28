@@ -14,7 +14,6 @@
 
 int	check_collectibles(t_game *game)
 {
-	ft_printf("nombre de collectibels: %d  ramasse: %d\n", game->nb_collectibles, game->collected);
 	if (game->nb_collectibles == game->collected)
 		return (1);
 	return (0);
@@ -28,7 +27,7 @@ int	legal_move(t_game *game, int x, int y)
 		game->collected += 1;
 	if (game->map[y][x] == 'E')
 	{
-		if (check_collectibles(game))//renvoi 1 si tout les collectibles  ont ete ramasse
+		if (check_collectibles(game))
 		{
 			ft_printf("You Win!!\n");
 			close_game(game);
@@ -37,4 +36,3 @@ int	legal_move(t_game *game, int x, int y)
 	}
 	return (1);
 }
-

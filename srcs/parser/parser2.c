@@ -22,7 +22,6 @@ int	is_rectangular(t_layout *layout)
 void	player_position(int x, int y, t_layout *layout)
 {
 	layout->player_position = malloc(sizeof(t_position));
-
 	if (!layout->player_position)
 	{
 		free(layout->map);
@@ -41,7 +40,7 @@ void	error_parsing(t_layout *layout, char *msg)
 	error_handler(msg);
 }
 
-void	ft_layout(t_layout *layout)//compte nombre de colonnes de lignes de collec exit player and x y
+void	ft_layout(t_layout *layout)
 {
 	int	y;
 	int	x ;
@@ -63,6 +62,6 @@ void	ft_layout(t_layout *layout)//compte nombre de colonnes de lignes de collec 
 	layout->rows = y;
 	layout->columns = x;
 	check_walls(layout);
-	if (!is_rectangular(layout) || !pathfinder(layout))//le pathfinder ne verifie que les caracteres 10ECP donc si il y a autre chose ds la carte on continue a essayer par exemple y - 1 si y == 0 ==>segfault
+	if (!is_rectangular(layout) || !pathfinder(layout))
 		error_parsing(layout, "Error\nMap isn't rectangular or isn't playable");
 }

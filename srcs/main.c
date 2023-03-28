@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
 void	ft_free_img(t_game *game)
 {
 	mlx_destroy_image(game->id, game->player);
@@ -20,7 +21,7 @@ void	ft_free_img(t_game *game)
 	mlx_destroy_image(game->id, game->exit);
 }
 
-int		close_game(t_game *game)
+int	close_game(t_game *game)
 {
 	ft_free_img(game);
 	mlx_clear_window(game->id, game->w_id);
@@ -33,7 +34,7 @@ int		close_game(t_game *game)
 	return (0);
 }
 
-int		key_hook(int key, t_game *game)
+int	key_hook(int key, t_game *game)
 {
 	if (key == KEY_ESC || key == KEY_Q)
 		close_game(game);
@@ -59,12 +60,18 @@ void	ft_init_game(t_game *game, t_layout *layout)
 	game->nb_collectibles = layout->collectibles;
 	game->collected = 0;
 	game->id = mlx_init();
-	game->w_id = mlx_new_window(game->id, game->width * size, game->height * size, "help");
-	game->wall = mlx_xpm_file_to_image(game->id, "./img/wall.xpm", &size, &size);
-	game->player = mlx_xpm_file_to_image(game->id, "./img/dolphin.xpm", &size, &size);
-	game->water = mlx_xpm_file_to_image(game->id, "./img/water.xpm", &size, &size);
-	game->fish = mlx_xpm_file_to_image(game->id, "./img/fish.xpm", &size, &size);
-	game->exit = mlx_xpm_file_to_image(game->id, "./img/exit.xpm", &size, &size);
+	game->w_id = mlx_new_window(game->id, game->width * size, \
+	game->height * size, "help");
+	game->wall = mlx_xpm_file_to_image(game->id, \
+	"./img/wall.xpm", &size, &size);
+	game->player = mlx_xpm_file_to_image(game->id, \
+	"./img/dolphin.xpm", &size, &size);
+	game->water = mlx_xpm_file_to_image(game->id, \
+	"./img/water.xpm", &size, &size);
+	game->fish = mlx_xpm_file_to_image(game->id, \
+	"./img/fish.xpm", &size, &size);
+	game->exit = mlx_xpm_file_to_image(game->id, \
+	"./img/exit.xpm", &size, &size);
 	game->map = layout->map;
 }
 
@@ -72,6 +79,7 @@ int	main(int ac, char **av)
 {
 	t_game		game;
 	t_layout	layout;
+
 	if (ac == 2)
 	{
 		check_map(av[1], &layout);

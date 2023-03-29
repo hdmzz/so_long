@@ -25,6 +25,7 @@ void	ft_move_left(t_game *game)
 		game->map[y][x - 1] = 'P';
 		game->pacman->x = x - 1;
 		game->moves_nbr += 1;
+		ft_printf("%d\n", game->moves_nbr);
 	}
 }
 
@@ -41,6 +42,7 @@ void	ft_move_right(t_game *game)
 		game->map[y][x + 1] = 'P';
 		game->pacman->x = x + 1;
 		game->moves_nbr += 1;
+		ft_printf("%d\n", game->moves_nbr);
 	}
 }
 
@@ -57,6 +59,7 @@ void	ft_move_up(t_game *game)
 		game->map[y - 1][x] = 'P';
 		game->pacman->y = y - 1;
 		game->moves_nbr += 1;
+		ft_printf("%d\n", game->moves_nbr);
 	}
 }
 
@@ -73,5 +76,6 @@ void	ft_move_down(t_game *game)
 		game->map[y + 1][x] = 'P';
 		game->pacman->y = y + 1;
 		game->moves_nbr += 1;
+		ft_printf("%d\n", game->moves_nbr);
 	}
 }

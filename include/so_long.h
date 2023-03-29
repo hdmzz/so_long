@@ -15,8 +15,8 @@
 
 # include "../libft/libft.h"
 # include <stdio.h>
-//# include "../mlx_linux/mlx.h"
-# include <mlx.h>
+# include "../mlx_linux/mlx.h"
+//# include <mlx.h>
 
 # define KEY_ESC 65307
 # define KEY_W 119

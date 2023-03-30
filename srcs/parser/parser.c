@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/28 22:01:28 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/30 09:39:17 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	check_walls(t_layout *map_lay)
 	size_t	len;
 
 	i = -1;
+	if (!map_lay->map[0])
+		error_handler("Error map\n");
 	len = ft_strlen(map_lay->map[0]);
 	while (map_lay->map[++i])
 	{
@@ -94,7 +96,7 @@ void	check_map(char *file, t_layout *map_lay)
 	splitter(map_lay, fd);
 	if (!map_lay->map)
 		exit(EXIT_FAILURE);
-	if (map_lay->player != 1 || map_lay->exit != 1 || map_lay->collectibles < 1)
+	if (map_lay->exit != 1 || map_lay->collectibles < 1)
 	{
 		ft_free_splitted_map(map_lay->map);
 		error_handler("Error\nEnter or exit not ok\n");

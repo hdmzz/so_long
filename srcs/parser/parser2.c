@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 21:09:51 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/28 22:06:09 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/30 09:13:33 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int	is_rectangular(t_layout *layout)
 
 void	player_position(int x, int y, t_layout *layout)
 {
+	layout->player += 1;
+	if (layout->player != 1)
+		error_parsing(layout, "More than one player");
 	layout->player_position = malloc(sizeof(t_position));
 	if (!layout->player_position)
 	{
@@ -29,14 +32,14 @@ void	player_position(int x, int y, t_layout *layout)
 	}
 	layout->player_position->x = x;
 	layout->player_position->y = y;
-	layout->player += 1;
 }
 
 void	error_parsing(t_layout *layout, char *msg)
 {
 	if (layout->player_position)
 		free(layout->player_position);
-	ft_free_splitted_map(layout->map);
+	if (layout->map)
+		ft_free_splitted_map(layout->map);
 	error_handler(msg);
 }
 

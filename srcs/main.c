@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:17:00 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/27 14:30:50 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/30 10:00:17 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_init_game(t_game *game, t_layout *layout)
 	game->water = mlx_xpm_file_to_image(game->id, \
 	"./img/water.xpm", &size, &size);
 	game->fish = mlx_xpm_file_to_image(game->id, \
-	"./img/fish.xpm", &size, &size);
+	"./img/collec.xpm", &size, &size);
 	game->exit = mlx_xpm_file_to_image(game->id, \
 	"./img/exit.xpm", &size, &size);
 	game->map = layout->map;

@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/30 20:59:45 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/31 11:37:37 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "../libft/libft.h"
-//# include <stdio.h>
+# include <stdio.h>
 # include "../minilibx-linux/mlx.h"
 # include <mlx.h>
 

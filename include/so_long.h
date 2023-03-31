@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/29 19:02:16 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/30 20:59:45 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define SO_LONG_H
 
 # include "../libft/libft.h"
-# include <stdio.h>
-//# include "../mlx_linux/mlx.h"
+//# include <stdio.h>
+# include "../minilibx-linux/mlx.h"
 # include <mlx.h>
 
 # define KEY_ESC 65307

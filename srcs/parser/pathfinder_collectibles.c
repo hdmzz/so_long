@@ -6,23 +6,11 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:52:36 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/29 19:39:36 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/30 10:09:17 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
-
-static void	print_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		ft_printf("%s\n", map[i]);
-		i++;
-	}
-}
 
 static int	find_path_collectibles(int x, int y, t_layout *layout)
 {

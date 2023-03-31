@@ -28,7 +28,13 @@ CC		= gcc
 %.o: %.c libft/libft.a  minilibx-linux/libmlx.a Makefile
 	$(CC) -c $< -o $@
 
-all:	libft $(NAME)
+all:	minilibx libft $(NAME)
+
+minilibx:
+	@if [ ! -d minilibx-linux ]; then \
+		git clone git@github.com:42Paris/minilibx-linux.git; \
+	fi
+	@make -C minilibx-linux
 
 libft:
 		@if [ ! -d libft ]; then \

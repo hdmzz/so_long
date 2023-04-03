@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:52:36 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/04/03 20:26:32 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/03 20:55:17 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ static void	print_map(char **map)
 
 static void	flood(int x, int y, t_layout *layout)
 {
-	usleep(500);
-	print_map(layout->map_dup);
 	if (layout->map_dup[y][x] == '1' || layout->map_dup[y][x] == '3' \
 		|| layout->map_dup[y][x] == 'E')
 		return ;
+	layout->map_dup[y][x] = '3';
 	flood(x, y + 1, layout);
 	flood(x, y - 1, layout);
 	flood(x - 1, y, layout);
@@ -62,6 +61,7 @@ int	pathfinder_collectibles(t_layout *layout)
 	layout->map_dup = path_clone(layout->map);
 	layout->nb_moves_max = (layout->rows * layout->columns) * 2;
 	layout->nb_moves = 0;
+	flood(layout->player_position->x, layout->player_position->y, layout);
 	is_path = check_collectibles(layout);
 	ft_free_splitted_map(layout->map_dup);
 	layout->collectibles = nb_collec;

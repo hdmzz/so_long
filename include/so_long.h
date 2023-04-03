@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/31 11:37:37 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/31 13:32:35 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ int		legal_move(t_game *game, int x, int y);
 int		pathfinder(t_layout *layout);
 int		pathfinder_collectibles(t_layout *layout);
 char	**path_clone(char **map);
-
-
 
 int		close_game(t_game *game);
 

@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 08:26:34 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/28 21:55:26 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/03 20:36:16 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void	print_map(char **map)
 
 static int	find_path(char **path, int y, int x)
 {
+	usleep(500);
+	print_map(path);
 	if (path[y][x] == '1' || path[y][x] == '3')
 		return (0);
 	if (path[y][x] == 'E')

@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/30 09:39:17 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/03/31 12:00:05 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	check_map(char *file, t_layout *map_lay)
 
 	is_ber_file(file);
 	fd = open(file, O_RDONLY);
+	if (fd < 1)
+		perror("Error ");
 	ft_init_layout(map_lay);
 	splitter(map_lay, fd);
 	if (!map_lay->map)

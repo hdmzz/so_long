@@ -6,23 +6,23 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 19:52:36 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/04/03 20:55:17 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:22:23 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/so_long.h"
 
-static void	print_map(char **map)
-{
-	int	i;
+// static void	print_map(char **map)
+// {
+// 	int	i;
 
-	i = 0;
-	while (map[i])
-	{
-		ft_printf("%s\n", map[i]);
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (map[i])
+// 	{
+// 		ft_printf("%s\n", map[i]);
+// 		i++;
+// 	}
+// }
 
 static void	flood(int x, int y, t_layout *layout)
 {
@@ -53,9 +53,8 @@ static int	check_collectibles(t_layout *layout)
 
 int	pathfinder_collectibles(t_layout *layout)
 {
-	char				**path;
-	int					is_path;
-	int					nb_collec;
+	int	is_path;
+	int	nb_collec;
 
 	nb_collec = layout->collectibles;
 	layout->map_dup = path_clone(layout->map);

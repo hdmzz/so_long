@@ -1,18 +1,9 @@
-ESC		= KEY_ESC=65307
-W		= KEY_W=119
-A		= KEY_A=97
-S		= KEY_S=115
-D		= KEY_D=100
-UP		= KEY_UP=65362
-DOWN	= KEY_DOWN=65364
-LEFT	= KEY_LEFT=65361
-RIGHT	= KEY_RIGHT=65363
-R		= KEY_R=114
-Q		= KEY_Q=113
+O		= objs/
+S		= srcs/
 
 NAME	=	so_long
 
-SRCS	=	srcs/main.c srcs/parser/parser.c \
+SRC	=	srcs/main.c srcs/parser/parser.c \
 			srcs/parser/parser2.c \
 			srcs/parser/pathfinder.c \
 			srcs/parser/pathfinder_collectibles.c \
@@ -22,13 +13,37 @@ SRCS	=	srcs/main.c srcs/parser/parser.c \
 			srcs/legal_move.c \
 			srcs/game.c
 
+OBJ = $(SRC:$S%=$O%.o)
+
 CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror
+LIBFLAGS =  libft/libft.a -Lmlx_linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
-
-%.o: %.c libft/libft.a  minilibx-linux/libmlx.a Makefile
-	$(CC) -c $< -o $@
+.PHONY:	all libft fclean re
 
 all:	minilibx libft $(NAME)
+
+$O:
+	@mkdir -p $@
+	@mkdir -p $@parser
+	@mkdir -p $@error
+
+$(OBJ): | $O
+
+$(OBJ): $O%.o: $S%
+	$(CC) $(CFLAGS) -c $< -o $@
+$D:
+	@mkdir $@
+	@mkdir -p $@parser
+	@mkdir -p $@error
+
+$(DEP): | $D
+
+$(DEP): $D%.d: $S%
+	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
+
+$(NAME): $(OBJ)
+	$(CC) -g3 $^ $(LIBFLAGS) -o $@
 
 minilibx:
 	@if [ ! -d minilibx-linux ]; then \
@@ -37,26 +52,19 @@ minilibx:
 	@make -C minilibx-linux
 
 libft:
-		@if [ ! -d libft ]; then \
-			git clone https://github.com/hdmzz/libft.git; \
-		fi
-		@make -C libft
-
-minilib:
-		@make -C minilibx-linux
-
-$(NAME):	$(SRCS:.c=.o)
-			$(CC) -g $(SRCS) libft/libft.a -Lmlx_linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	@if [ ! -d libft ]; then \
+		git clone https://github.com/hdmzz/libft.git; \
+	fi
+	@make -C libft
 
 clean:
-			rm -drf $(SRCS:.c=.o)
-			@make clean -C libft
+	rm -drf $(wildcard $(OBJ))
+	@make clean -C libft
 
 fclean:	clean
-		rm -drf $(NAME)
-		@make fclean -C libft
-		@make fclean -C mlx_linux
+	rm -drf $(NAME)
+	@make fclean -C libft
+	@make fclean -C minilibx-linux
 
-re:		fclean all
+re:	fclean all  
 
-.PHONY:	all libft fclean re

@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/31 12:00:05 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:20:13 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ static void	splitter(t_layout *map_lay, int fd)
 	char	*line;
 	char	*res;
 	char	*temp;
-	int		i;
 
 	line = get_next_line(fd);
 	res = ft_strdup("");
-	i = 0;
 	while (line)
 	{
 		temp = res;

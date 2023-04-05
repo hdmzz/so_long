@@ -30,8 +30,8 @@ $O:
 
 $(OBJ): | $O
 
-$(OBJ): $O%.o: $S%
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ): $O%.o: $S% Makefile include/so_long.h
+	$(CC) -g3 $(CFLAGS) -c $< -o $@
 $D:
 	@mkdir $@
 	@mkdir -p $@parser
@@ -43,7 +43,7 @@ $(DEP): $D%.d: $S%
 	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
 
 $(NAME): $(OBJ)
-	$(CC) -g3 $^ $(LIBFLAGS) -o $@
+	$(CC) $^ $(LIBFLAGS) -o $@
 
 minilibx:
 	@if [ ! -d minilibx-linux ]; then \

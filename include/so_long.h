@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/31 13:32:35 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:29:23 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_layout
 typedef struct s_player
 {
 	void		*img;
-	t_position	*curr_position;
 	int			x;
 	int			y;
 }				t_player;
@@ -92,7 +91,7 @@ void	check_map(char *file, t_layout *map_lay);
 void	check_walls(t_layout *map_lay);
 int		is_rectangular(t_layout *layout);
 
-void	new_position(int x, int y, t_game *game, t_position *position);
+void	new_position(int x, int y, t_game *game);
 void	ft_layout(t_layout *layout);
 
 void	ft_move_left(t_game *game);

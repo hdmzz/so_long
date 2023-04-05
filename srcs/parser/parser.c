@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/04/05 12:20:13 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/05 13:19:32 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ void	check_walls(t_layout *map_lay)
 
 	i = -1;
 	if (!map_lay->map[0])
+	{
+		free(map_lay->map);
 		error_handler("Error map\n");
+	}
 	len = ft_strlen(map_lay->map[0]);
 	while (map_lay->map[++i])
 	{

@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 05:31:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/03/23 19:29:59 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:28:51 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_init_map(t_game *game, int pac_pos)
 {
 	int			x;
 	int			y;
-	t_position	position;
 
 	y = -1;
 	while (game->map[++y])
@@ -25,11 +24,10 @@ void	ft_init_map(t_game *game, int pac_pos)
 		while (game->map[y][++x])
 		{
 			if (pac_pos && game->map[y][x] == 'P')
-				new_position(x, y, game, &position);
+				new_position(x, y, game);
 		}
 	}
 	ft_put_map(game);
-	game->pacman->curr_position = &position;
 	game->moves_nbr = 0;
 }
 

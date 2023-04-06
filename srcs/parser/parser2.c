@@ -65,6 +65,7 @@ void	ft_layout(t_layout *layout)
 	layout->rows = y;
 	layout->columns = x;
 	check_walls(layout);
-	if (!is_rectangular(layout) || !pathfinder(layout) || !pathfinder_collectibles(layout))
+	if (!is_rectangular(layout) || !pathfinder(layout) || \
+	!pathfinder_collectibles(layout))
 		error_parsing(layout, "Error\nMap isn't rectangular or isn't playable");
 }

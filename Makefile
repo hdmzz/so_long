@@ -1,5 +1,6 @@
 O		= objs/
 S		= srcs/
+D		= dep/
 
 NAME	=	so_long
 
@@ -14,6 +15,7 @@ SRC	=	srcs/main.c srcs/parser/parser.c \
 			srcs/game.c
 
 OBJ = $(SRC:$S%=$O%.o)
+DEP = $(SRC:$S%=$D%.d)
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
@@ -58,13 +60,16 @@ libft:
 	@make -C libft
 
 clean:
-	rm -drf $(wildcard $(OBJ))
+	rm -rf $(wildcard $(OBJ))
+	rm -rf $(wildcard $(DEP))
 	@make clean -C libft
 
 fclean:	clean
-	rm -drf $(NAME)
+	rm -rf $(NAME)
+	rm -rf $O
+	rm -rf $D
 	@make fclean -C libft
-	@make fclean -C minilibx-linux
 
 re:	fclean all  
 
+-include $(DEP)

@@ -1,21 +1,25 @@
 O		= objs/
-S		= srcs/
+S		= src/
 D		= dep/
 
 NAME	=	so_long
 
-SRC	=	srcs/main.c srcs/parser/parser.c \
-			srcs/parser/parser2.c \
-			srcs/parser/pathfinder.c \
-			srcs/parser/pathfinder_collectibles.c \
-			srcs/error/error.c \
-			srcs/utils.c \
-			srcs/move.c \
-			srcs/legal_move.c \
-			srcs/game.c
+SRC	=	$Smain.c $Sparser/parser.c \
+			$Sparser/parser2.c \
+			$Sparser/pathfinder.c \
+			$Sparser/pathfinder_collectibles.c \
+			$Serror/error.c \
+			$Sutils.c \
+			$Smove.c \
+			$Slegal_move.c \
+			$Sgame.c
+
+-include settings.mk
+-include $(DEPLIB)
 
 OBJ = $(SRC:$S%=$O%.o)
 DEP = $(SRC:$S%=$D%.d)
+DEPLIB = $(SRCLIB:$S%=$D%.d)
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
@@ -32,14 +36,14 @@ $O:
 
 $(OBJ): | $O
 
-$(OBJ): $O%.o: $S% Makefile include/so_long.h
+$(OBJ): $O%.o: $S% Makefile include/so_long.h libft/libft.a
 	$(CC) -g3 $(CFLAGS) -c $< -o $@
 $D:
 	@mkdir $@
 	@mkdir -p $@parser
 	@mkdir -p $@error
 
-$(DEP): | $D
+$(DEP): | $D | libft | minilibx
 
 $(DEP): $D%.d: $S%
 	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
@@ -60,8 +64,8 @@ libft:
 	@make -C libft
 
 clean:
-	rm -rf $(wildcard $(OBJ))
-	rm -rf $(wildcard $(DEP))
+	rm -rf $(SRC:$S%=$O%.o)
+	rm -rf $(SRC:$S%=$D%.d)
 	@make clean -C libft
 
 fclean:	clean

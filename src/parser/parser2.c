@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 21:09:51 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/04/03 20:51:18 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/08 22:54:37 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	player_position(int x, int y, t_layout *layout)
 {
 	layout->player += 1;
 	if (layout->player != 1)
-		error_parsing(layout, "More than one player");
+		error_layout(layout);
 	layout->player_position = malloc(sizeof(t_position));
 	if (!layout->player_position)
 	{
-		free(layout->map);
+		ft_free_splitted_map(layout->map);
 		error_handler("");
 	}
 	layout->player_position->x = x;
@@ -65,7 +65,8 @@ void	ft_layout(t_layout *layout)
 	layout->rows = y;
 	layout->columns = x;
 	check_walls(layout);
-	if (!is_rectangular(layout) || !pathfinder(layout) || \
-	!pathfinder_collectibles(layout))
-		error_parsing(layout, "Error\nMap isn't rectangular or isn't playable");
+	if (!layout->player || layout->player != 1)
+		error_layout(layout);
+	if (!is_rectangular(layout) || !pathfinder(layout))
+		error_parsing(layout, "Error\nMap isn't rectangular or isn't playable\n");
 }

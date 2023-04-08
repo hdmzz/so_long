@@ -6,8 +6,7 @@ NAME	=	so_long
 
 SRC	=	$Smain.c $Sparser/parser.c \
 			$Sparser/parser2.c \
-			$Sparser/pathfinder.c \
-			$Sparser/pathfinder_collectibles.c \
+			$Sparser/map_playable.c \
 			$Serror/error.c \
 			$Sutils.c \
 			$Smove.c \

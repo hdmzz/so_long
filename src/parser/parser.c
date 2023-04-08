@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/04/05 13:19:32 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/08 23:35:04 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@ static void	is_ber_file(char *map)
 	char	*extensions_check;
 
 	extensions_check = ft_strnstr(map, ".ber", ft_strlen(map));
-	if (!extensions_check || ft_strlen(extensions_check) != 4)
+	if (extensions_check == NULL || ft_strlen(extensions_check) != 4)
 	{
-		free(extensions_check);
-		perror("Error\nExtensions check\n");
+		error_handler("Error\nExtensions check\n");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -57,6 +56,7 @@ static void	ft_init_layout(t_layout *map_lay)
 	map_lay->player = 0;
 	map_lay->rows = 0;
 	map_lay->columns = 0;
+	map_lay->player_position = NULL;
 }
 
 void	check_walls(t_layout *map_lay)
@@ -68,16 +68,16 @@ void	check_walls(t_layout *map_lay)
 	if (!map_lay->map[0])
 	{
 		free(map_lay->map);
-		error_handler("Error map\n");
+		error_handler("Error\nmap\n");
 	}
 	len = ft_strlen(map_lay->map[0]);
 	while (map_lay->map[++i])
 	{
 		if (ft_strspn(map_lay->map[i], "10EPC") != len)
-			error_parsing(map_lay, "Error map must be made of 01ECP\n");
+			error_parsing(map_lay,"Error\nConfiguration\n");
 		if ((map_lay->map[i][0] != '1' && map_lay->map[i][len - 1] != '1') \
 			|| (map_lay->map[i][0] != '1' || map_lay->map[i][len - 1] != '1'))
-			error_parsing(map_lay, "Error\nMap isn't close by walls\n");
+			error_parsing(map_lay, "Error\nMap walls\n");
 	}
 	if (ft_strspn(map_lay->map[0], "1") != len || \
 		ft_strspn(map_lay->map[i - 1], "1") != len)
@@ -94,7 +94,7 @@ void	check_map(char *file, t_layout *map_lay)
 	is_ber_file(file);
 	fd = open(file, O_RDONLY);
 	if (fd < 1)
-		perror("Error ");
+		error_handler("Error\nno such file or directory\n");
 	ft_init_layout(map_lay);
 	splitter(map_lay, fd);
 	if (!map_lay->map)

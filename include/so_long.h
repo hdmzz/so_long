@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/04/05 12:29:23 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/08 22:56:23 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	ft_put_map(t_game *game);
 int		ft_update(t_game *game);
 
 void	error_handler(char *msg);
+void	error_layout(t_layout *layout);
 void	error_parsing(t_layout *layout, char *msg);
 
 void	ft_free_splitted_map(char **tab);
@@ -100,8 +101,6 @@ void	ft_move_down(t_game *game);
 
 int		legal_move(t_game *game, int x, int y);
 int		pathfinder(t_layout *layout);
-int		pathfinder_collectibles(t_layout *layout);
-char	**path_clone(char **map);
 
 int		close_game(t_game *game);
 

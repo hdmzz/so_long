@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:05:46 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/04/08 22:56:23 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/09 01:43:17 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	ft_free_splitted_map(char **tab);
 
 void	check_map(char *file, t_layout *map_lay);
 void	check_walls(t_layout *map_lay);
+void	check_walls2(t_layout *layout);
 int		is_rectangular(t_layout *layout);
 
 void	new_position(int x, int y, t_game *game);

@@ -23,9 +23,9 @@ DEPLIB = $(SRCLIB:$S%=$D%.d)
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
-LIBFLAGS =  libft/libft.a -Lmlx_linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+LIBFLAGS =  libft/libft.a minilibx-linux/libmlx.a -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
-.PHONY:	all libft fclean re $D $O
+.PHONY:	all libft fclean re
 
 all:	minilibx libft $(NAME)
 
@@ -34,7 +34,7 @@ $O:
 	@mkdir -p $@parser
 	@mkdir -p $@error
 
-$(OBJ): | $O
+$(OBJ): | $O 
 
 $(OBJ): $O%.o: $S% Makefile include/so_long.h libft/libft.a
 	$(CC) -g3 $(CFLAGS) -c $< -o $@
@@ -44,7 +44,7 @@ $D:
 	@mkdir -p $@parser
 	@mkdir -p $@error
 
-$(DEP): | $D
+$(DEP): | $D | libft | minilibx
 
 $(DEP): $D%.d: $S%
 	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<

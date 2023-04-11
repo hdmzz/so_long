@@ -25,7 +25,7 @@ CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 LIBFLAGS =  libft/libft.a -Lmlx_linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
-.PHONY:	all libft fclean re
+.PHONY:	all libft fclean re $D $O
 
 all:	minilibx libft $(NAME)
 

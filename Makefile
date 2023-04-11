@@ -43,7 +43,7 @@ $D:
 	@mkdir -p $@parser
 	@mkdir -p $@error
 
-$(DEP): | $D | libft | minilibx
+$(DEP): | $D
 
 $(DEP): $D%.d: $S%
 	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<

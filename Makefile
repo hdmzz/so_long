@@ -39,15 +39,13 @@ $(OBJ): $O%.o: $S% Makefile include/so_long.h libft/libft.a
 	$(CC) -g3 $(CFLAGS) -c $< -o $@
 	
 $D:
-	@mkdir -p $@
-	@mkdir -p $@parser
-	@mkdir -p $@error
+	@mkdir $@
+	@mkdir $@parser
+	@mkdir $@error
 
 $(DEP): | $D
 
 $(DEP): $D%.d: $S%
-	libft
-	minilibx
 	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
 
 $(NAME): $(OBJ)

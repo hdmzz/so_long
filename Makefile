@@ -15,7 +15,6 @@ SRC	=	$Smain.c $Sparser/parser.c \
 			$Sgame.c
 
 -include settings.mk
--include $(DEPLIB)
 
 OBJ = $(SRC:$S%=$O%.o)
 DEP = $(SRC:$S%=$D%.d)
@@ -29,16 +28,6 @@ LIBFLAGS =  libft/libft.a minilibx-linux/libmlx.a -L/usr/lib -Imlx_linux -lXext 
 
 all:	minilibx libft $(NAME)
 
-$O:
-	@mkdir -p $@
-	@mkdir -p $@parser
-	@mkdir -p $@error
-
-$(OBJ): | $O 
-
-$(OBJ): $O%.o: $S% Makefile include/so_long.h libft/libft.a
-	$(CC) -g3 $(CFLAGS) -c $< -o $@
-
 $D:
 	@mkdir -p $@
 	@mkdir -p $@parser
@@ -48,6 +37,16 @@ $(DEP): | $D | libft | minilibx
 
 $(DEP): $D%.d: $S%
 	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
+
+$O:
+	@mkdir -p $@
+	@mkdir -p $@parser
+	@mkdir -p $@error
+
+$(OBJ): | $O
+
+$(OBJ): $O%.o: $S% Makefile include/so_long.h libft/libft.a
+	$(CC) -g3 $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
 	$(CC) $^ $(LIBFLAGS) -o $@
@@ -78,3 +77,4 @@ fclean:	clean
 re:	fclean all  
 
 -include $(DEP)
+-include $(DEPLIB)

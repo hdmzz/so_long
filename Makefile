@@ -14,7 +14,7 @@ SRC =	$Smain.c $Sparser/parser.c \
 			$Slegal_move.c \
 			$Sgame.c
 
--include settings.mk
+-include libft/settings.mk
 
 OBJ = $(SRC:$S%=$O%.o)
 DEP = $(SRC:$S%=$D%.d)
@@ -37,6 +37,18 @@ $(OBJ): | $O
 
 $(OBJ): $O%.o: $S% Makefile include/so_long.h libft/libft.a
 	$(CC) -g3 $(CFLAGS) -c $< -o $@
+	
+$D:
+	@mkdir -p $@
+	@mkdir -p $@parser
+	@mkdir -p $@error
+
+$(DEP): | $D
+
+$(DEP): $D%.d: $S%
+	libft
+	minilibx
+	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
 
 $(NAME): $(OBJ)
 	$(CC) $^ $(LIBFLAGS) -o $@
@@ -66,15 +78,6 @@ fclean:	clean
 
 re:	fclean all  
 
-$D:
-	@mkdir -p $@
-	@mkdir -p $@parser
-	@mkdir -p $@error
-
-$(DEP): | $D | libft | minilibx
-
-$(DEP): $D%.d: $S%
-	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
 
 -include $(DEP)
 -include $(DEPLIB)

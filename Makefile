@@ -38,6 +38,7 @@ $(OBJ): | $O
 
 $(OBJ): $O%.o: $S% Makefile include/so_long.h libft/libft.a
 	$(CC) -g3 $(CFLAGS) -c $< -o $@
+
 $D:
 	@mkdir -p $@
 	@mkdir -p $@parser

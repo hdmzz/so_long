@@ -37,19 +37,6 @@ $(OBJ): | $O
 
 $(OBJ): $O%.o: $S% Makefile include/so_long.h libft/libft.a
 	$(CC) -g3 $(CFLAGS) -c $< -o $@
-	
-$D:
-	@mkdir $@
-	@mkdir $@parser
-	@mkdir $@error
-
-$(DEP): | $D
-
-$(DEP): $D%.d: $S%
-	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
-
-$(NAME): $(OBJ)
-	$(CC) $^ $(LIBFLAGS) -o $@
 
 minilibx:
 	@if [ ! -d minilibx-linux ]; then \
@@ -62,6 +49,19 @@ libft:
 		git clone https://github.com/hdmzz/libft.git; \
 	fi
 	@make -C libft
+
+$D:
+	@mkdir $@
+	@mkdir $@parser
+	@mkdir $@error
+
+$(DEP): $D%.d: $S%
+	$D
+	libftminilibx
+	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
+
+$(NAME): $(OBJ)
+	$(CC) $^ $(LIBFLAGS) -o $@
 
 clean:
 	rm -rf $(SRC:$S%=$O%.o)

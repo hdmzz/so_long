@@ -1,10 +1,10 @@
-O		= objs/
-S		= src/
-D		= dep/
+O = objs/
+S = src/
+D = dep/
 
-NAME	=	so_long
+NAME =	so_long
 
-SRC	=	$Smain.c $Sparser/parser.c \
+SRC =	$Smain.c $Sparser/parser.c \
 			$Sparser/parser2.c \
 			$Sparser/parser3.c \
 			$Sparser/map_playable.c \
@@ -20,23 +20,13 @@ OBJ = $(SRC:$S%=$O%.o)
 DEP = $(SRC:$S%=$D%.d)
 DEPLIB = $(SRCLIB:$S%=$D%.d)
 
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
 LIBFLAGS =  libft/libft.a minilibx-linux/libmlx.a -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
-.PHONY:	all libft fclean re
+.PHONY: all libft fclean re
 
-all:	minilibx libft $(NAME)
-
-$D:
-	@mkdir -p $@
-	@mkdir -p $@parser
-	@mkdir -p $@error
-
-$(DEP): | $D | libft | minilibx
-
-$(DEP): $D%.d: $S%
-	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
+all: minilibx libft $(NAME)
 
 $O:
 	@mkdir -p $@
@@ -75,6 +65,16 @@ fclean:	clean
 	@make fclean -C libft
 
 re:	fclean all  
+
+$D:
+	@mkdir -p $@
+	@mkdir -p $@parser
+	@mkdir -p $@error
+
+$(DEP): | $D | libft | minilibx
+
+$(DEP): $D%.d: $S%
+	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
 
 -include $(DEP)
 -include $(DEPLIB)

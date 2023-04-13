@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:15:01 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/04/09 01:43:56 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:42:59 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	splitter(t_layout *map_lay, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+	close(fd);
 	map = ft_split(res, '\n');
 	free(res);
 	free(line);

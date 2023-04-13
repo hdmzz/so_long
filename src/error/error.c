@@ -6,7 +6,7 @@
 /*   By: hdamitzi <hdamitzi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 18:35:43 by hdamitzi          #+#    #+#             */
-/*   Updated: 2023/04/08 22:54:53 by hdamitzi         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:46:53 by hdamitzi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	error_handler(char *msg)
 {
-	ft_printf("%s", msg);
+	write(STDERR_FILENO, msg, ft_strlen(msg));
 	exit(EXIT_FAILURE);
 }
 

@@ -1,6 +1,5 @@
 O = objs/
 S = src/
-D = dep/
 
 NAME =	so_long
 
@@ -14,13 +13,9 @@ SRC =	$Smain.c $Sparser/parser.c \
 			$Slegal_move.c \
 			$Sgame.c
 
--include libft/settings.mk
-
 OBJ = $(SRC:$S%=$O%.o)
-DEP = $(SRC:$S%=$D%.d)
-DEPLIB = $(SRCLIB:$S%=$D%.d)
 
-CC = gcc
+CC = gcc -g3
 CFLAGS = -Wall -Wextra -Werror
 LIBFLAGS =  libft/libft.a minilibx-linux/libmlx.a -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
@@ -50,16 +45,6 @@ libft:
 	fi
 	@make -C libft
 
-$D:
-	@mkdir $@
-	@mkdir $@parser
-	@mkdir $@error
-
-$(DEP): $D%.d: $S%
-	$D
-	libftminilibx
-	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
-
 $(NAME): $(OBJ)
 	$(CC) $^ $(LIBFLAGS) -o $@
 
@@ -75,7 +60,3 @@ fclean:	clean
 	@make fclean -C libft
 
 re:	fclean all  
-
-
--include $(DEP)
--include $(DEPLIB)

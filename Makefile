@@ -1,10 +1,10 @@
-O		= objs/
-S		= src/
-D		= dep/
+O = objs/
+S = src/
+D = dep/
 
-NAME	=	so_long
+NAME =	so_long
 
-SRC	=	$Smain.c $Sparser/parser.c \
+SRC =	$Smain.c $Sparser/parser.c \
 			$Sparser/parser2.c \
 			$Sparser/parser3.c \
 			$Sparser/map_playable.c \
@@ -14,20 +14,19 @@ SRC	=	$Smain.c $Sparser/parser.c \
 			$Slegal_move.c \
 			$Sgame.c
 
--include settings.mk
--include $(DEPLIB)
+-include libft/settings.mk
 
 OBJ = $(SRC:$S%=$O%.o)
 DEP = $(SRC:$S%=$D%.d)
 DEPLIB = $(SRCLIB:$S%=$D%.d)
 
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
-LIBFLAGS =  libft/libft.a -Lmlx_linux -lmlx -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+LIBFLAGS =  libft/libft.a minilibx-linux/libmlx.a -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
-.PHONY:	all libft fclean re
+.PHONY: all libft fclean re
 
-all:	minilibx libft $(NAME)
+all: minilibx libft $(NAME)
 
 $O:
 	@mkdir -p $@
@@ -38,18 +37,6 @@ $(OBJ): | $O
 
 $(OBJ): $O%.o: $S% Makefile include/so_long.h libft/libft.a
 	$(CC) -g3 $(CFLAGS) -c $< -o $@
-$D:
-	@mkdir -p $@
-	@mkdir -p $@parser
-	@mkdir -p $@error
-
-$(DEP): | $D
-
-$(DEP): $D%.d: $S%
-	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
-
-$(NAME): $(OBJ)
-	$(CC) $^ $(LIBFLAGS) -o $@
 
 minilibx:
 	@if [ ! -d minilibx-linux ]; then \
@@ -62,6 +49,19 @@ libft:
 		git clone https://github.com/hdmzz/libft.git; \
 	fi
 	@make -C libft
+
+$D:
+	@mkdir $@
+	@mkdir $@parser
+	@mkdir $@error
+
+$(DEP): $D%.d: $S%
+	$D
+	libftminilibx
+	$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
+
+$(NAME): $(OBJ)
+	$(CC) $^ $(LIBFLAGS) -o $@
 
 clean:
 	rm -rf $(SRC:$S%=$O%.o)
@@ -76,4 +76,6 @@ fclean:	clean
 
 re:	fclean all  
 
+
 -include $(DEP)
+-include $(DEPLIB)
